@@ -1,0 +1,38 @@
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+}
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.shimmer {
+    animation: shimmer 1.5s infinite linear;
+    background: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 20%, #f0f0f0 40%, #f0f0f0 100%);
+    background-size: 1000px 100%;
+    position: relative;
+}
+
+.transparent-card {
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+}
+
+.shimmer-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 0.5rem;
+}
+
+.shimmer-card .shimmer {
+    background: linear-gradient(to right, #f6f6f6 0%, #eeeeee 20%, #f6f6f6 40%, #f6f6f6 100%);
+    background-size: 1000px 100%;
+}
+
+.shimmer-card .shimmer.rounded {
+    border-radius: 0.25rem;
+}
