@@ -8,6 +8,7 @@ import { MENU_URL } from "../utils/constants";
 function ProductCard() {
   const [list, setList] = useState(null);
   const [error, setError] = useState(null);
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +48,7 @@ function ProductCard() {
 
   return (
     <>
-      <Searchfilter />
+      <Searchfilter/>
       <div className="flex flex-wrap gap-4 justify-center w-full">
         {list.map((restaurant) => (
           <Link
