@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Searchfilter() {
-  const [searchFilter, setSearchFilter] = useState("");
+  const [searchFilter, setSearchFilter] = useState([]);
 
   const handleInputChange = (event) => {
     setSearchFilter(event.target.value);
@@ -9,7 +9,7 @@ function Searchfilter() {
 
   const handleSearchClick = () => {
     // Implement your search logic here
-    
+
 
     console.log("Search clicked! Search term:", searchFilter); // Placeholder for now
   };

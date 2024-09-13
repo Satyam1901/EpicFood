@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer";
 import { Card } from "@material-tailwind/react";
 import { useParams } from "react-router-dom";
 import useFetchRestaurantData from "../utils/useFetchRestaurantData";
+import ResturantList from "./ResturantList";
 
 function ItemCard({ item, isExpanded, onClick }) {
   return (
@@ -60,6 +61,7 @@ function RestaurantMenu() {
   };
 
   return (
+    <>
     <div className="flex justify-center p-5 min-h-screen bg-gradient-to-br from-blue-500 to-purple-600">
       <Card className="w-full max-w-[26rem] shadow-lg rounded-lg p-6 bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg">
         <h1 className="text-3xl font-extrabold mb-4 text-gray-900">{name}</h1>
@@ -84,6 +86,8 @@ function RestaurantMenu() {
         </ul>
       </Card>
     </div>
+      <ResturantList />
+      </>
   );
 }
 
