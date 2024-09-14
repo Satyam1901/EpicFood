@@ -1,22 +1,29 @@
-import  { useEffect } from 'react'
+import  { useEffect, useState } from 'react'
 import { MENU_List } from '../utils/constants'
+import RestaurantCatagory from './RestaurantCatagory';
 
 function ResturantList() {
+
+  const [resdata, setResData] = useState("");
 const menuitem = async () =>{
     const itemlist = await fetch(MENU_List)
     const json = await itemlist.json();
-    const catogories = json?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => c.card?.card?.["@type"])
-    console.log(catogories)
+    setResData(json)
+  
 }
- 
 
+const catogories= resdata?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c) => c.card?.card?.["@type"])
 
  useEffect(() => {
     menuitem();
  },[])
 
   return (
-    <div>ResturantList</div>
+    <div>
+     {catogories?.map((category, index) => (
+        <RestaurantCatagory key={index} category={category?.card?.card} />
+      ))}
+    </div>
   )
 }
 
