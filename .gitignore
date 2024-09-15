@@ -79,3 +79,6 @@ coverage/
 
 # Mac system files
 Thumbs.db
+
+# Ignore constants.js in src/utils folder
+src/utils/constants.js
