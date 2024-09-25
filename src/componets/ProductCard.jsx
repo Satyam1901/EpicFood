@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import { MENU_URL } from "../utils/constants";
 
 function ProductCard() {
-  const [restaurants, setRestaurants] = useState(null);
+  const [list, setList] = useState(null);
   const [error, setError] = useState(null);
+ 
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
+    const fetchData = async () => {
       try {
         const response = await fetch(MENU_URL);
 
@@ -18,26 +19,24 @@ function ProductCard() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
-        if (!data || !data.data || !data.data.cards || data.data.cards.length < 3) {
-          throw new Error("Invalid response from server.");
-        }
-        const restaurants =
-          data.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
-        setRestaurants(restaurants);
+        const json = await response.json();
+        const newData =
+          json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants;
+        setList(newData);
       } catch (error) {
+        console.error("Error fetching data:", error);
         setError(error.message);
       }
     };
 
-    fetchRestaurants();
+    fetchData();
   }, []);
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
-  if (!restaurants) {
+  if (list === null) {
     return (
       <div className="flex flex-wrap gap-4">
         {[...Array(12)].map((_, index) => (
@@ -51,9 +50,9 @@ function ProductCard() {
     <>
       <Searchfilter/>
       <div className="flex flex-wrap gap-4 justify-center w-full">
-        {restaurants.map((restaurant) => (
+        {list.map((restaurant) => (
           <Link
-            to={`/resturantmenu/${restaurant.info.id}`}
+            to={"/resturantmenu/" + restaurant.info.id}
             key={restaurant.info.id}
             className="w-full max-w-[26rem] flex justify-center"
           >
@@ -76,12 +75,12 @@ function ProductCard() {
                   </div>
                 </div>
                 <CardBody className="p-4 flex flex-col justify-between">
-                  <Typography
+                  <h4
                     color="blue-gray"
                     className="font-medium mb-2 overflow-hidden overflow-ellipsis"
                   >
                     {restaurant.info.cuisines.join(", ")}
-                  </Typography>
+                  </h4>
                   <div className="flex items-center justify-between mb-2">
                     <Typography
                       color="blue-gray"
@@ -114,6 +113,5 @@ function ProductCard() {
     </>
   );
 }
-
 
 export default ProductCard;

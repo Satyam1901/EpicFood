@@ -17,6 +17,7 @@ import RestaurantCatagory from './RestaurantCatagory';
  */
 function ResturantList() {
   const [categories, setCategories] = useState([]);
+  const [indexing, setIndexing] = useState();
 
   useEffect(() => {
     fetch(MENU_List)
@@ -32,10 +33,13 @@ function ResturantList() {
 
   return (
     <div>
-      {categories
-      .slice(1, -1)
-      .map((category, index) => (
-        <RestaurantCatagory key={index} category={category.card.card} />
+      {categories.map((category, index) => (
+        <RestaurantCatagory key={category.card.card.title} category={category.card.card} showItems = {index === indexing ? true : false}
+        setIndexing={() => {
+          setIndexing(index);
+        }}
+        />
+        
       ))}
     </div>
   );
